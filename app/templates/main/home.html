@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Home - SaaS Growth Analyzer{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 text-center">
+            <h1 class="display-4 mb-4">Welcome to SaaS Growth Analyzer</h1>
+            <p class="lead">Analyze your SaaS metrics with AI-powered insights</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        {% if current_user.is_authenticated %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Upload New Data</h3>
+                        <p class="card-text">Upload your SaaS metrics data for analysis</p>
+                        <a href="{{ url_for('analytics.upload_data') }}" class="btn btn-primary">Upload Data</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">View Dashboard</h3>
+                        <p class="card-text">Check your latest analytics and insights</p>
+                        <a href="{{ url_for('analytics.dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Get Started</h3>
+                        <p class="card-text">Create an account to start analyzing your SaaS metrics</p>
+                        <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Already have an account?</h3>
+                        <p class="card-text">Login to access your dashboard</p>
+                        <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title">Data Analysis</h4>
+                    <p class="card-text">Upload your CSV or Excel files for instant analysis of key metrics including user growth, churn rate, and revenue.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title">AI Insights</h4>
+                    <p class="card-text">Get AI-powered recommendations and insights about your SaaS metrics and growth patterns.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title">Visualizations</h4>
+                    <p class="card-text">View interactive charts and graphs to better understand your growth trends and patterns.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

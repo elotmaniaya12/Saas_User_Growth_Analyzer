@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if metrics %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card dashboard-header">
+                    <div class="card-body">
+                        <h2>SaaS Growth Analytics Dashboard</h2>
+                        <p class="text-muted">Last updated: {{ latest_metric.date.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Key Metrics Cards -->
+            <div class="col-md-3">
+                <div class="card metrics-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Active Users</h5>
+                        <h3 class="card-text">{{ "%.0f"|format(latest_metric.active_users) }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metrics-card">
+                    <div class="card-body">
+                        <h5 class="card-title">New Users</h5>
+                        <h3 class="card-text">{{ latest_metric.new_users }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metrics-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Churn Rate</h5>
+                        <h3 class="card-text">{{ "%.2f%%"|format(latest_metric.churn_rate) }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metrics-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Revenue</h5>
+                        <h3 class="card-text">${{ "%.2f"|format(latest_metric.revenue) }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- Visualizations -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">User Growth Trends</h5>
+                        <div class="chart-container">
+                            <img src="{{ url_for('static', filename=latest_metric.file_path + '_users.png') }}" 
+                                 class="img-fluid" alt="User Growth Chart">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Revenue & Churn Analysis</h5>
+                        <div class="chart-container">
+                            <img src="{{ url_for('static', filename=latest_metric.file_path + '_revenue_churn.png') }}" 
+                                 class="img-fluid" alt="Revenue and Churn Chart">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- AI Insights -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">AI-Generated Insights</h5>
+                        <div class="ai-insights">
+                            {{ latest_metric.ai_recommendations|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h2>Welcome to SaaS Growth Analytics</h2>
+                <p class="lead">No data available yet. Start by uploading your SaaS metrics data.</p>
+                <a href="{{ url_for('analytics.upload_data') }}" class="btn btn-primary btn-lg">
+                    Upload Data
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

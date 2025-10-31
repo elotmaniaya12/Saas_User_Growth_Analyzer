@@ -1,0 +1,31 @@
+/* Custom styles for SaaS Growth Analyzer */
+
+.metrics-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.metrics-card:hover {
+    transform: translateY(-5px);
+}
+
+.chart-container {
+    height: 300px;
+    margin: 20px 0;
+}
+
+.auth-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+    margin-bottom: 30px;
+    padding: 20px 0;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
